@@ -18,9 +18,8 @@ namespace WebApplication1.Controllers
 
         [HttpGet]
         [Route("sums")]
-        public Response<SumsResult>[] GetSums()
-        {
-            return Enumerable.Range(0, 16)
+        public Response<SumsResult>[] GetSums() =>
+            Enumerable.Range(0, 16)
                 .Select(_ => _sourceGenerator.GetSumSource())
                 .Select(x => new SumsResult
                 {
@@ -32,13 +31,11 @@ namespace WebApplication1.Controllers
                 })
                 .Select(set => new Response<SumsResult> { Set = set })
                 .ToArray();
-        }
 
         [HttpGet]
         [Route("subtractions")]
-        public Response<SubtractionsResult>[] GetSubtractions()
-        {
-            return Enumerable.Range(0, 16)
+        public Response<SubtractionsResult>[] GetSubtractions() =>
+            Enumerable.Range(0, 16)
                 .Select(_ => _sourceGenerator.GetSubtractionsSource())
                 .Select(x => new SubtractionsResult
                 {
@@ -50,13 +47,11 @@ namespace WebApplication1.Controllers
                 })
                 .Select(set => new Response<SubtractionsResult> { Set = set })
                 .ToArray();
-        }
 
         [HttpGet]
         [Route("multiplications")]
-        public Response<MultiplicationsResult>[] GetMultiplications()
-        {
-            return Enumerable.Range(0, 16)
+        public Response<MultiplicationsResult>[] GetMultiplications() =>
+            Enumerable.Range(0, 16)
                 .Select(_ => _sourceGenerator.GetMultiplicationsSource())
                 .Select(x => new MultiplicationsResult
                 {
@@ -69,13 +64,11 @@ namespace WebApplication1.Controllers
                 })
                 .Select(set => new Response<MultiplicationsResult> { Set = set })
                 .ToArray();
-        }
 
         [HttpGet]
         [Route("divisions")]
-        public Response<DivisionsResult>[] GetDivisions()
-        {
-            return Enumerable.Range(0, 16)
+        public Response<DivisionsResult>[] GetDivisions() =>
+            Enumerable.Range(0, 16)
                 .Select(_ => _sourceGenerator.GetDivisionsSource())
                 .Select(x => new DivisionsResult
                 {
@@ -86,6 +79,5 @@ namespace WebApplication1.Controllers
                 })
                 .Select(set => new Response<DivisionsResult> { Set = set })
                 .ToArray();
-        }
     }
 }

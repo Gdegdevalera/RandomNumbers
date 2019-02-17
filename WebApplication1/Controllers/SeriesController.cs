@@ -24,9 +24,8 @@ namespace WebApplication1.Controllers
 
         [HttpGet]
         [Route("duplicates")]
-        public DuplicatesResult[] GetDuplicates()
-        {
-            return Enumerable.Range(0, 20)
+        public DuplicatesResult[] GetDuplicates() => 
+            Enumerable.Range(0, 20)
                 .Select(_ => _sourceGenerator.GetDuplicatesSource())
                 .Select(x => new DuplicatesResult
                 {
@@ -35,36 +34,31 @@ namespace WebApplication1.Controllers
                     RowsWithDuplicate = x.Set.GetRowWithDuplicate()
                 })
                 .ToArray();
-        }
 
         [HttpGet]
         [Route("search")]
-        public SearchResult GetSearch()
-        {
-            var source = _sourceGenerator.GetSearchSource();
-            return new SearchResult
-            {
-                NumbersToFind = source.Numbers,
-                Array = source.Array,
-                Result = source.Numbers
-                    .Select((x, i) => new { Key = i + 1, Value = source.Array.Search(x) })
-                    .ToDictionary(x => $"PositionsOfNumber{x.Key}", x => x.Value)
-            };
-        }
+        public SearchResult GetSearch() => 
+            _sourceGenerator.GetSearchSource().Map(source => 
+                new SearchResult
+                {
+                    NumbersToFind = source.Numbers,
+                    Array = source.Array,
+                    Result = source.Numbers
+                        .Select((x, i) => new { Key = i + 1, Value = source.Array.Search(x) })
+                        .ToDictionary(x => $"PositionsOfNumber{x.Key}", x => x.Value)
+                });
 
         [HttpGet]
         [Route("exactsearch")]
-        public ExactSearchResult GetExactSearch()
-        {
-            var source = _sourceGenerator.GetExactSearchSource();
-            return new ExactSearchResult
-            {
-                ExactPairsToFind = source.Pairs,
-                Array = source.Array,
-                Result = source.Pairs
-                    .Select((x, i) => new { Key = i + 1, Value = source.Array.Search(x) })
-                    .ToDictionary(x => $"PositionsOfPair{x.Key}", x => x.Value)
-            };
-        }
+        public ExactSearchResult GetExactSearch() => 
+            _sourceGenerator.GetExactSearchSource().Map(source =>
+               new ExactSearchResult
+               {
+                   ExactPairsToFind = source.Pairs,
+                   Array = source.Array,
+                   Result = source.Pairs
+                       .Select((x, i) => new { Key = i + 1, Value = source.Array.Search(x) })
+                       .ToDictionary(x => $"PositionsOfPair{x.Key}", x => x.Value)
+               });
     }
 }

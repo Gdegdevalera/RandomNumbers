@@ -5,10 +5,8 @@ namespace WebApplication1.Extensions
 {
     public static class ArrayExtensions
     {
-        public static int[] Search(this int[] array, int value)
-        {
-            return array.Select((x, i) => x == value ? i : -1).Where(x => x != -1).ToArray();
-        }
+        public static int[] Search(this int[] array, int value) => 
+            array.Select((x, i) => x == value ? i : -1).Where(x => x != -1).ToArray();
 
         public static int[] Search(this int[] array, int[] value)
         {

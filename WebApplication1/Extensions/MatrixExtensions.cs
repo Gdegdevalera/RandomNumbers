@@ -6,17 +6,13 @@ namespace WebApplication1.Extensions
 {
     public static class MatrixExtensions
     {
-        public static int[] GetColumnWithDuplicate(this int[][] matrix)
-        {
-            return GetRowWithDuplicate(matrix.Transpose());
-        }
+        public static int[] GetColumnWithDuplicate(this int[][] matrix) => 
+            GetRowWithDuplicate(matrix.Transpose());
 
-        public static int[] GetRowWithDuplicate(this int[][] matrix)
-        {
-            return matrix.Select((x, i) => x.Distinct().Count() != x.Length ? i : -1)
+        public static int[] GetRowWithDuplicate(this int[][] matrix) => 
+            matrix.Select((x, i) => x.Distinct().Count() != x.Length ? i : -1)
                 .Where(x => x != -1)
                 .ToArray();
-        }
 
         public static int[][] Transpose(this int[][] matrix)
         {

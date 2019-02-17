@@ -18,9 +18,8 @@ namespace WebApplication1.Controllers
 
         [HttpGet]
         [Route("expression")]
-        public ExpressionResult[] GetExpression()
-        {
-            return Enumerable.Range(0, 25)
+        public ExpressionResult[] GetExpression() => 
+            Enumerable.Range(0, 25)
                 .Select(_ => _generator.GetExpressionSource())
                 .Select(x => new
                 {
@@ -33,6 +32,5 @@ namespace WebApplication1.Controllers
                     Result = x.Operands.Aggregate(x.Head, (acc, operand) => operand.Apply(acc))
                 })
                 .ToArray();
-        }
     }
 }

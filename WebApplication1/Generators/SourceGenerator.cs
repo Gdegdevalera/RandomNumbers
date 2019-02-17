@@ -5,8 +5,8 @@ using WebApplication1.Models.Source;
 
 namespace WebApplication1.Generators
 {
-    public class SourceGenerator : 
-        ICalculationSourceGenerator, 
+    public class SourceGenerator :
+        ICalculationSourceGenerator,
         IMultipleCalculationSourceGenerator,
         ISeriesSourceGenerator
     {
@@ -17,33 +17,27 @@ namespace WebApplication1.Generators
             _generator = generator;
         }
 
-        ExpressionSource IMultipleCalculationSourceGenerator.GetExpressionSource()
-        {
-            return new ExpressionSource
+        ExpressionSource IMultipleCalculationSourceGenerator.GetExpressionSource() =>
+            new ExpressionSource
             {
                 Numbers = _generator.Source(1, 99).Take(4).ToArray(),
                 Operations = _generator.Source(1, 2).Take(3).Cast<Operation>().ToArray(),
             };
-        }
 
-        DivisionsSource ICalculationSourceGenerator.GetDivisionsSource()
-        {
-            return new DivisionsSource
+        DivisionsSource ICalculationSourceGenerator.GetDivisionsSource() =>
+            new DivisionsSource
             {
                 Number1 = _generator.Next(100, 9999),
                 Number2 = _generator.Next(2, 9),
             };
-        }
 
-        MultiplicationsSource ICalculationSourceGenerator.GetMultiplicationsSource()
-        {
-            return new MultiplicationsSource
+        MultiplicationsSource ICalculationSourceGenerator.GetMultiplicationsSource() =>
+            new MultiplicationsSource
             {
                 Number1 = _generator.Next(100, 999),
                 Number2 = _generator.Next(2, 9),
                 IsValidResult = _generator.TrueOrFalse()
             };
-        }
 
         SubtractionsSource ICalculationSourceGenerator.GetSubtractionsSource()
         {
@@ -57,24 +51,20 @@ namespace WebApplication1.Generators
             };
         }
 
-        SumsSource ICalculationSourceGenerator.GetSumSource()
-        {
-            return new SumsSource
+        SumsSource ICalculationSourceGenerator.GetSumSource() =>
+            new SumsSource
             {
                 Numbers = _generator.Source(10, 99).Take(3).ToArray(),
                 IsValidResult = _generator.TrueOrFalse()
             };
-        }
 
-        DuplicatesSource ISeriesSourceGenerator.GetDuplicatesSource()
-        {
-            return new DuplicatesSource
+        DuplicatesSource ISeriesSourceGenerator.GetDuplicatesSource() =>
+            new DuplicatesSource
             {
                 Set = Enumerable.Range(0, 4)
-                        .Select(__ => _generator.Source(0, 9).Take(4).ToArray())
-                        .ToArray()
+                            .Select(__ => _generator.Source(0, 9).Take(4).ToArray())
+                            .ToArray()
             };
-        }
 
         SearchSource ISeriesSourceGenerator.GetSearchSource()
         {
